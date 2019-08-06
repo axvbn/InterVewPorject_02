@@ -118,5 +118,45 @@ namespace InterVewPorject_02.Models
             return strResult;
         }
 
+        public string Delete(Categories myCategories)
+        {
+            string strResult = string.Empty;
+            int result = 0;
+            using (SqlConnection conn = new SqlConnection(GetConnect()))
+            {
+                if (conn.State != ConnectionState.Open)
+                {
+                    conn.Open();
+                }
+
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    try
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandText = "Delete From Categories Where CategoryID = @CategoryID ";
+                        cmd.Parameters.Add(new SqlParameter("@CategoryID", myCategories.CategoryID));
+                        result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            strResult = "刪除成功";
+                        }
+                        else
+                        {
+                            strResult = "刪除失敗";
+                        }
+                    }
+                    catch (SqlException)
+                    {
+                        strResult = "刪除失敗";
+                        throw;
+                    }
+                }
+            }
+
+            return strResult;
+        }
+
     }
 }

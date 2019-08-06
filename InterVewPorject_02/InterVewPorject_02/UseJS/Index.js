@@ -67,6 +67,29 @@
         })
     }
 
+    function Delete() {
+        let objParams = {
+            'CategoryID': $('#Modal_CategoryID').val(),
+            'CategoryName': '',
+            'Description': ''
+        };
+        $.ajax({
+            type: 'POST', url: '/Home/Index_Delete', async: true,
+            data: { jData: JSON.stringify(objParams) },
+            success: function (data) {
+                if (data !== null && data !== '') {
+                    alert(data);
+                    $("#CategoriesTB  tr:not(:first)").empty("");
+                    $('#InsertModal').modal('hide');
+                    Query();
+                }
+            },
+            error: function (data) {
+                alert(data);
+            }
+        })
+    }
+
     //查詢
     $('#btnQuery').click(function () {
         $("#CategoriesTB  tr:not(:first)").empty("");
@@ -96,6 +119,12 @@
                 $('#Modal_Description').val($(this).parent().prevAll('.Description').text());
                 $('#InsertModal').modal('show');
                 break;
+            case 'btnDelete':
+                $('#Modal_CategoryID').val($(this).parent().prevAll('.CategoryID').text());
+                let ans = confirm('確定要刪除嗎？');
+                if (ans) {
+                    Delete();
+                }
         }
     })
 
