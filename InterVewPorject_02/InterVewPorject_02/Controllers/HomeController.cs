@@ -33,6 +33,16 @@ namespace InterVewPorject_02.Controllers
             return result;
         }
 
+        public string Index_Update(string jData)
+        {
+            string result = string.Empty;
+            M_Index MI = new M_Index();
+            Categories myCategories = JsonConvert.DeserializeObject<Categories>(jData);
+            result = MI.Update(myCategories);
+
+            return result;
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
