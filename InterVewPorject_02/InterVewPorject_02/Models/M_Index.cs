@@ -8,13 +8,14 @@ using System.Web;
 
 namespace InterVewPorject_02.Models
 {
-    public class M_Index : Databace
+    public class M_Index 
     {
+        Databace db = new Databace();
         public string Query()
         {
             string strJson = string.Empty;
             DataTable dtResult = new DataTable();
-            using (SqlConnection conn = new SqlConnection(GetConnect()))
+            using (SqlConnection conn = new SqlConnection(db.GetConnect()))
             {
                 if (conn.State != ConnectionState.Open)
                 {
@@ -39,7 +40,7 @@ namespace InterVewPorject_02.Models
         {
             string strResult = string.Empty;
             int result = 0;
-            using (SqlConnection conn = new SqlConnection(GetConnect()))
+            using (SqlConnection conn = new SqlConnection(db.GetConnect()))
             {
                 if (conn.State != ConnectionState.Open)
                 {
@@ -80,7 +81,7 @@ namespace InterVewPorject_02.Models
         {
             string strResult = string.Empty;
             int result = 0;
-            using (SqlConnection conn = new SqlConnection(GetConnect()))
+            using (SqlConnection conn = new SqlConnection(db.GetConnect()))
             {
                 if (conn.State != ConnectionState.Open)
                 {
@@ -122,7 +123,7 @@ namespace InterVewPorject_02.Models
         {
             string strResult = string.Empty;
             int result = 0;
-            using (SqlConnection conn = new SqlConnection(GetConnect()))
+            using (SqlConnection conn = new SqlConnection(db.GetConnect()))
             {
                 if (conn.State != ConnectionState.Open)
                 {

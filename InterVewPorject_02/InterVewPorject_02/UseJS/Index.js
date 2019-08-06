@@ -100,6 +100,7 @@
     $('#btnInsert').click(function () {
         $('#Modal_btnINSERT').css('display', '');
         $('#Modal_btnUPDATE').css('display', 'none');
+        $('#Modal_CategoryID').val('');
         $('#InsertModal').modal('show');
     })
 

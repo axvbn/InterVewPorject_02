@@ -6,9 +6,9 @@ using System.Web.Configuration;
 
 namespace InterVewPorject_02.Models
 {
-    public abstract class Databace
+    public  class Databace
     {
-        protected string GetConnect()
+        public string GetConnect()
         {
             string connect = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
