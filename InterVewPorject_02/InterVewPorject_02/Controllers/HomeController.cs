@@ -1,4 +1,5 @@
 ﻿using InterVewPorject_02.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,16 @@ namespace InterVewPorject_02.Controllers
             string strJson = MI.Query();
 
             return Json(strJson);
+        }
+
+        public string Index_Insert(string jData)
+        {
+            string result = string.Empty;
+            M_Index MI = new M_Index();
+            Categories myCategories = JsonConvert.DeserializeObject<Categories>(jData);
+            result = MI.Insert(myCategories);
+
+            return result;
         }
 
         public ActionResult About()

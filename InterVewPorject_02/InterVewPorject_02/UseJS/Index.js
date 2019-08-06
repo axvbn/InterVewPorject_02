@@ -21,9 +21,46 @@
         })
     }
 
+    function Insert() {
+        let objParams = {
+            'CategoryID': $('#Modal_CategoryID').val(),
+            'CategoryName': $('#Modal_CategoryName').val(),
+            'Description': $('#Modal_Description').val()
+        };
+        $.ajax({
+            type: 'POST', url: '/Home/Index_Insert', async: true,
+            data: { jData: JSON.stringify(objParams) },
+            success: function (data) {
+                if (data !== null && data !== '') {
+                    alert(data);
+                    $("#CategoriesTB  tr:not(:first)").empty("");
+                    $('#InsertModal').modal('hide');
+                    Query();
+                }
+            },
+            error: function (data) {
+                alert(data);
+            }
+        })
+    }
+
+    //查詢
     $('#btnQuery').click(function () {
         $("#CategoriesTB  tr:not(:first)").empty("");
         Query()
+    })
+
+    //新增畫面
+    $('#btnInsert').click(function () {
+        $('#Modal_CategoryID').attr('readonly', true);
+        $('#Modal_btnINSERT').css('display', '');
+        $('#Modal_btnUPDATE').css('display', 'none');
+        $('#InsertModal').modal('show');
+    })
+
+    //確定新增
+    $('#Modal_btnINSERT').click(function () {
+        Insert();
     })
 
 })
